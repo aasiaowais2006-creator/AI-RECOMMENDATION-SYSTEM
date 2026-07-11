@@ -1,0 +1,40 @@
+# AI Recommendation System
+
+items = {
+    "Python Programming": ["programming", "python", "coding", "ai"],
+    "Machine Learning": ["ai", "machine learning", "python", "data"],
+    "Web Development": ["html", "css", "javascript", "web"],
+    "Data Science": ["python", "data", "statistics"],
+    "Cyber Security": ["security", "network", "hacking"],
+    "Graphic Design": ["design", "photoshop", "creativity"]
+}
+
+print("=== AI Recommendation System ===")
+print("Enter your interests separated by commas.")
+print("Example: python, ai, data")
+
+user_input = input("\nYour interests: ").lower().split(",")
+
+user_interests = [interest.strip() for interest in user_input]
+
+scores = {}
+
+for item, tags in items.items():
+    score = 0
+    for interest in user_interests:
+        if interest in tags:
+            score += 1
+    scores[item] = score
+
+recommendations = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+
+print("\nRecommended for you:\n")
+
+found = False
+for item, score in recommendations:
+    if score > 0:
+        print(f"{item} (Match Score: {score})")
+        found = True
+
+if not found:
+    print("No matching recommendations found. Try different interests.")
